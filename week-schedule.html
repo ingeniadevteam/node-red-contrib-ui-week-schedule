@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<script type="text/javascript">
+(function() {
+  const defaults = {
+    group: {type: 'ui_group', required: true},
+    order: {value: 0},
+    label: {value: ''},
+    name: {value: ''},
+    order: {value: 0},
+    width: {
+      value: 0,
+      validate: function(v) {
+        var valid = true
+        var width = v||0;
+        var currentGroup = $('#node-input-group').val()|| this.group;
+        var groupNode = RED.nodes.node(currentGroup);
+        valid = !groupNode || +width <= +groupNode.width;
+        $("#node-input-size").toggleClass("input-error",!valid);
+        return valid;
+      }},
+      height: {value: 0}
+    }
+
+    const label = function() {
+      return this.name || 'week schedule';
+    }
+
+    const oneditprepare = function() {
+      $("#node-input-size").elementSizer({
+        width: "#node-input-width",
+        height: "#node-input-height",
+        group: "#node-input-group"
+      });
+    }
+
+    const oneditsave = function() {
+
+    }
+
+    const oneditresize = function() {
+
+    }
+    RED.nodes.registerType('ui_week_schedule', {
+      category: 'dashboard',
+      paletteLabel: 'week schedule',
+      color: 'rgb(63, 173, 181)',
+      defaults: defaults,
+      inputs: 1,
+      inputLabels: "value",
+      outputs: 1,
+      align: 'right',
+      label: label,
+      icon: "calendar.png",
+
+      oneditprepare: oneditprepare,
+      oneditsave: oneditsave,
+      oneditresize: oneditresize
+    });
+  })();
+</script>
+
+<script type="text/x-red" data-template-name="ui_week_schedule">
+    <div class="form-row" id="template-row-group">
+       <label for="node-input-group"><i class="fa fa-table"></i> Group</label>
+       <input type="text" id="node-input-group">
+    </div>
+    <div class="form-row" id="template-row-size">
+        <label><i class="fa fa-object-group"></i> Size</label>
+        <input type="hidden" id="node-input-width">
+        <input type="hidden" id="node-input-height">
+        <button class="editor-button" id="node-input-size"></button>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="ui_week_schedule">
+    <p>A week schedule for the Node-RED Dashboard</p>
+</script>

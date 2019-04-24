@@ -1,0 +1,34 @@
+{
+  "name": "node-red-contrib-ui-week-schedule",
+  "version": "0.1.0",
+  "description": "A week Schedule for the Node-RED Dashboard",
+  "main": "week-schedule.js",
+  "author": "Víctor Navarro <vicnala@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-red-dashboard": "2.13.x"
+  },
+  "keywords": [
+    "node-red",
+    "schedule",
+    "dashboard",
+    "ui"
+  ],
+  "node-red": {
+    "nodes": {
+      "ui_led": "week-schedule.js"
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/vicnala/node-red-contrib-ui-week-schedule/issues"
+  },
+  "homepage": "https://github.com/vicnala/node-red-contrib-ui-week-schedule",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vicnala/node-red-contrib-ui-week-schedule.git"
+  },
+  "devDependencies": {
+    "eslint": "5.x",
+    "eslint-plugin-angular": "4.x"
+  }
+}
