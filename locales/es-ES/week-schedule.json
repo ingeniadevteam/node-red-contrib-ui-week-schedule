@@ -1,0 +1,16 @@
+{
+  "week_schedule" : {
+    "0": "LUNES",
+    "1": "MARTES",
+    "2": "MIÉRCOLES",
+    "3": "JUEVES",
+    "4": "VIERNES",
+    "5": "SÁBADO",
+    "6": "DOMINGO",
+    "HOURCOPIED": "Configuración copiada a la siguiente hora",
+    "DAYCOPIED": "Copiada la configuración del día completo",
+    "SAVED": "Configuración guardada",
+    "DAYOFWEEK": "Día de la semana",
+    "SELECTED": "Seleccionado el periodo horario"
+  }
+}

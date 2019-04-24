@@ -47,7 +47,8 @@ module.exports = function(RED) {
 							console.log("msg", msg._msgid);
 							// update server side node timing
 							node.timing = msg.timing;
-							utils.controls(node, msg);
+							// set controls
+							utils.controls(node, msg, RED);
 							return msg;
 						}
 						if (orig) {
@@ -55,7 +56,8 @@ module.exports = function(RED) {
 								console.log("orig.msg", orig.msg);
 								// setup msg timing
 								orig.msg.timing = node.timing;
-								utils.controls(node, orig.msg);
+								// set controls
+								utils.controls(node, orig.msg, RED);
 								return orig.msg;
 							}
 						}

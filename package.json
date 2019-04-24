@@ -16,7 +16,7 @@
   ],
   "node-red": {
     "nodes": {
-      "ui_led": "week-schedule.js"
+      "week_schedule": "week-schedule.js"
     }
   },
   "bugs": {

@@ -9,7 +9,7 @@ A week schedule for the Node-RED Dashboard
 ![Examples Image](images/examples.png)
 ![UI Image](images/ui.png)
 
-## TODOs
+## TODO
 
 * i18n
 
