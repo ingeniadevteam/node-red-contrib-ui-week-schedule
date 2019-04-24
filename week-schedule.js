@@ -2,10 +2,7 @@ module.exports = function(RED) {
 	'use strict';
 	var utils = require('./utils');
 
-	/**
-	* Week Schedule Node construction function
-	* @param {object} config Node configuration object
-	*/
+	// Week Schedule Node constructor
 	function WeekScheduleNode(config) {
 		try {
 			var ui = undefined;
@@ -23,13 +20,11 @@ module.exports = function(RED) {
 			if ( typeof node.timing == 'undefined' )
 			{
 				node.timing=[
-					0,0,0,0,0,0,0,21,21,21,21,21,21,21,21,21,21,21,21,0,0,0,0,0,
-					0,0,0,0,0,0,0,21,21,21,21,21,21,21,21,21,21,21,21,0,0,0,0,0,
-					0,0,0,0,0,0,0,21,21,21,21,21,21,21,21,21,21,21,21,0,0,0,0,0,
-					0,0,0,0,0,0,0,21,21,21,21,21,21,21,21,21,21,21,21,0,0,0,0,0,
-					0,0,0,0,0,0,0,21,21,21,21,21,21,21,21,21,21,21,21,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 				];
 				node.saving=0;
 			}
@@ -45,13 +40,24 @@ module.exports = function(RED) {
 					order: config.order,
 					beforeEmit: utils.beforeEmit(node, RED),
 					beforeSend: function (msg, orig) {
-						if (orig) {
-							utils.controls(node, orig.msg);
-							return orig.msg;
+						/********************
+						* THIS IS SERVER SIDE
+						********************/
+						if (msg.timing) {
+							console.log("msg", msg._msgid);
+							// update server side node timing
+							node.timing = msg.timing;
+							utils.controls(node, msg);
+							return msg;
 						}
-
-						if (msg.payload) {
-							console.log("msg", msg);
+						if (orig) {
+							if (orig.msg) {
+								console.log("orig.msg", orig.msg);
+								// setup msg timing
+								orig.msg.timing = node.timing;
+								utils.controls(node, orig.msg);
+								return orig.msg;
+							}
 						}
 					},
 					initController: utils.initController

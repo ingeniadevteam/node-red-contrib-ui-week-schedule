@@ -3,11 +3,11 @@ module.exports = {
         return String.raw`
       <style>
         .thedays { vertical-align:bottom; height:48px; }
-        .the2px  { background-color:black; height:2px; }
+        .the2px  { background-color:#00A4DE; height:2px; }
         .theblocks {width:100%; height:0%; background-color:green; }
         .greybuttons { background-color:#dddddd !important; width:48px; }
         .thetemps { font-size:70%; color:#888888 !important; }
-        .smallheadings { color:black; font-size:80%; }
+        .smallheadings { color:#00A4DE; font-size:80%; }
 			</style>
       <table width="100%">
       <tr>
@@ -17,7 +17,7 @@ module.exports = {
         <td ng-click="send({payload: '29'})" colspan=12><center><span id="d0" style="color:blue;font-size:120%">LUNES</span></center></td>
       </tr>
       <tr style="height:2px">
-        <td id="td29" colspan=12 style="background-color:black;height:2px;"></td>
+        <td id="td29" colspan=12 style="background-color:#00A4DE;height:2px;"></td>
       </tr>
       <tr>
         <td ng-click="send({payload: '5'})" class="thedays"><span id="v0" class="thetemps"></span><div id="t0" class="theblocks"></div></td>
@@ -106,7 +106,7 @@ module.exports = {
         <td>23</td>
       </tr>
       <tr height="20px">
-        <td colspan=2 bgcolor="#dddddd" class="smallheadings">Estado:</td>
+        <td colspan=2 bgcolor="#dddddd" class="smallheadings">ESTADO</td>
         <td colspan=10 bgcolor="#dddddd"><center><span id="info" class="smallheadings" ></span></center></td>
       </tr>
       <tr height="10px">
@@ -115,28 +115,28 @@ module.exports = {
       <tr style="height:48px">
         <td colspan=2>
             <md-button  class="vibrate filled touched bigfont rounded greybuttons" aria-label="left" ng-click="send({payload: 'd'})">
-                <md-icon md-svg-src="/ic_keyboard_arrow_left_black_24px.svg"></md-icon>
+                <ui-icon icon="keyboard_arrow_left"></ui-icon>
             </md-button>
         </td>
-      <td colspan=2><center><span id="current" style="color:black;font-size:120%">-</span></center></td>
+      <td colspan=2><center><span id="current" style="color:#00A4DE;font-size:120%">-</span></center></td>
       <td colspan=2>
             <md-button class="vibrate filled touched bigfont rounded greybuttons" aria-label="right" ng-click="send({payload: 'u'})">
-                <md-icon md-svg-src="/ic_keyboard_arrow_right_black_24px.svg"></md-icon>
+                <ui-icon icon="keyboard_arrow_right"></ui-icon>
             </md-button>
         </td>
         <td colspan=2>
             <md-button  class="vibrate filled touched smallfont rounded greybuttons" aria-label="copy" ng-click="send({payload: 'r'})">
-                <md-icon md-svg-src="/ic_content_copy_black_24px.svg"></md-icon>
+                <ui-icon icon="content_copy"></ui-icon>
             </md-button>
         </td>
         <td colspan=2>
             <md-button  class="vibrate filled touched smallfont rounded greybuttons" aria-label="save" ng-click="send({payload: 's'})">
-                <md-icon md-svg-src="/ic_save_black_24px.svg"></md-icon>
+                <ui-icon icon="save"></ui-icon>
             </md-button>
         </td>
         <td colspan=2>
             <md-button  class="vibrate filled touched smallfont rounded greybuttons" aria-label="cancel" ng-click="send({payload: 'c'})">
-                <md-icon md-svg-src="/ic_cancel_black_24px.svg"></md-icon>
+                <ui-icon icon="cancel"></ui-icon>
             </md-button>
         </td>
         <td colspan=1></td>
@@ -146,15 +146,11 @@ module.exports = {
 
 	},
 
-  /**
-  * Check for that we have a config instance and that our config instance has a group selected, otherwise report an error
-  * @param {object} config - The config instance
-  * @param {object} node - The node to report the error on
-  * @returns {boolean} `false` if we encounter an error, otherwise `true`
-  */
+
+  // Check for that we have a config instance and that our config instance has
+  // a group selected, otherwise report an error
   checkConfig: function(config, node) {
     if (!config) {
-      // TODO: have to think further if it makes sense to separate these out, it isn't clear what the user can do if they encounter this besides use the explicit error to more clearly debug the code
       node.error(RED._("ui_week_schedule.error.no-config"));
       return false;
     }
@@ -166,6 +162,10 @@ module.exports = {
   },
 
   controls: function(node, msg) {
+    /********************
+    * THIS IS SERVER SIDE
+    ********************/
+
     // TODO: duplicate code because of execution scope, fix this shit :|
     switch (msg.payload) {
       case "u":
@@ -247,6 +247,7 @@ module.exports = {
       break;
       case 's': node.saving=0;
         msg.foryou="Configuración guardada";
+        msg.save = node.timing;
       break;
       case '1':
       case '2':
@@ -288,20 +289,20 @@ module.exports = {
       break;
       case 'c': msg.payload="anything";
         msg.foryou="Cambios cancelados";
-        // node.send([null,null,msg]);
     }
 
-    msg.timing=node.timing;
     msg.days=node.days;
     msg.selector=node.selector;
+
+    console.log("ui click", msg._msgid ? msg._msgid : "", msg.foryou ? msg.foryou : "");
   },
 
 
   beforeEmit: function(node, RED) {
+    /********************
+    * THIS IS SERVER SIDE
+    ********************/
     return function(msg, value) {
-
-      console.log("beforeEmit", msg);
-
       switch (msg.payload) {
         case "u":
           if ((node.selector>4)&&(node.selector<29)) {
@@ -382,6 +383,7 @@ module.exports = {
         break;
         case 's': node.saving=0;
           msg.foryou="Configuración guardada";
+          msg.save = node.timing;
         break;
         case '1':
         case '2':
@@ -426,7 +428,10 @@ module.exports = {
         // node.send([null,null,msg]);
       }
 
-      msg.timing=node.timing;
+      // update node timing
+      if (msg.timing) {
+        node.timing=msg.timing;
+      }
       msg.days=node.days;
       msg.selector=node.selector;
 
@@ -437,8 +442,9 @@ module.exports = {
   },
 
   initController: function($scope) {
-    $scope.flag = true;
-
+    /******************************
+    * THIS IS CLIENT (browser) SIDE
+    ******************************/
     var thedays = ["LUNES","MARTES","MIÉRCOLES","JUEVES","VIERNES","SÁBADO","DOMINGO"];
     var last = 1;
 
@@ -493,12 +499,15 @@ module.exports = {
       }
     };
 
+    $scope.flag = true;
+
     var update = (msg) => {
-      console.log(">>>", msg);
-      console.log(">>>", $scope);
       if (!msg) {
         return;
       }
+
+      console.log("ui msg", msg._msgid);
+
       // updateUI
       updateUI(msg);
     };
