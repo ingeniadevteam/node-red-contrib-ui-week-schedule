@@ -11,10 +11,16 @@ module.exports = {
 </style>
 <table width="100%">
 <tr>
-  <td ng-click="send({payload: '29'})" colspan=12><center><span id="d0" style="color:#00A4DE;font-size:120%">MONDAY</span></center></td>
+    <td colspan=9><center><span class="smallheadings" >Día</span></center></td>
+    <td colspan=3><center><span class="smallheadings" >Caldera</span></center></td>
+</tr>
+<tr>
+  <td ng-click="send({payload: '29'})" colspan=9><center><span id="d0" style="color:#00A4DE;font-size:120%">MONDAY</span></center></td>
+  <td ng-click="send({payload: '2'})" colspan=3><center><span id="s1" style="color:#00A4DE;font-size:120%">20</span></center></td>
 </tr>
 <tr style="height:2px">
-  <td id="td29" colspan=12 style="background-color:#00A4DE;height:2px;"></td>
+  <td id="td29" colspan=9 style="background-color:#00A4DE;height:2px;"></td>
+  <td id="td2" colspan=3 style="background-color:#00A4DE;height:2px;"></td>
 </tr>
 <tr>
   <td ng-click="send({payload: '5'})" class="thedays"><span id="v0" class="thetemps"></span><div id="t0" class="theblocks"></div></td>
