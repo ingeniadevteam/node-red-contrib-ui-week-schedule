@@ -24,7 +24,7 @@ module.exports = function(RED) {
 					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+					0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,20
 				];
 				node.saving=0;
 			}
@@ -47,6 +47,8 @@ module.exports = function(RED) {
 							console.log("msg", msg._msgid);
 							// update server side node timing
 							node.timing = msg.timing;
+							// set topic
+							msg.topic = config.name;
 							// set controls
 							utils.controls(node, msg, RED);
 							return msg;
@@ -56,6 +58,8 @@ module.exports = function(RED) {
 								console.log("orig.msg", orig.msg);
 								// setup msg timing
 								orig.msg.timing = node.timing;
+								// set topic
+								orig.msg.topic = config.name;
 								// set controls
 								utils.controls(node, orig.msg, RED);
 								return orig.msg;

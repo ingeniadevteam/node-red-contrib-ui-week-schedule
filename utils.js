@@ -178,7 +178,7 @@ module.exports = {
       if (node.selector==1) {
         if (node.timing[168+(node.selector-1)]<29) {
           node.timing[168+(node.selector-1)]++;
-          msg.foryou="Incrementada 1 grado la temperatura contra heladas";
+          msg.foryou="+1º la temperatura contra heladas";
         } else {
           msg.foryou="Has llegado al límite"
         };
@@ -186,7 +186,7 @@ module.exports = {
       if (node.selector==2) {
         if (node.timing[168+(node.selector-1)]<29) {
           node.timing[168+(node.selector-1)]++;
-          msg.foryou="Incrementada 1 grado la temperatura de apagado de la caldera";
+          msg.foryou="+1º la temperatura de apagado de la caldera";
         } else {
           msg.foryou="Has llegado al límite";
         }
@@ -210,7 +210,7 @@ module.exports = {
       if (node.selector==1) {
         if (node.timing[168+(node.selector-1)]>12) {
           node.timing[168+(node.selector-1)]--;
-          msg.foryou="Decrememtada 1 grado la temperatura contra heladas";
+          msg.foryou="-1º la temperatura contra heladas";
         } else {
           msg.foryou="Has llegado al límite";
         }
@@ -218,7 +218,7 @@ module.exports = {
       if (node.selector==2) {
         if (node.timing[168+(node.selector-1)]>12) {
           node.timing[168+(node.selector-1)]--;
-          msg.foryou="Decrememtada 1 grado la temperatura de apagado de la caldera";
+          msg.foryou="-1º la temperatura de apagado de la caldera";
         } else {
           msg.foryou="Has llegado al límite";
         }
@@ -279,7 +279,11 @@ module.exports = {
       case '27':
       case '28':
       case '29': node.selector=parseInt(msg.payload);
-        if (msg.payload=='29')
+        if (msg.payload=='1')
+          msg.foryou="Seleccionada la temperatura contra heladas";
+        else if (msg.payload=='2')
+          msg.foryou="Temperatura de apagado de la caldera";
+        else if (msg.payload=='29')
           msg.foryou=RED._("week_schedule.DAYOFWEEK");
         else
           msg.foryou=`${RED._("week_schedule.SELECTED")} ${parseInt(msg.payload)-4}`;
@@ -313,7 +317,7 @@ module.exports = {
           if (node.selector==1) {
             if (node.timing[168+(node.selector-1)]<29) {
               node.timing[168+(node.selector-1)]++;
-              msg.foryou="Incrementada 1 grado la temperatura contra heladas";
+              msg.foryou="+1º la temperatura contra heladas";
             } else {
               msg.foryou="Has llegado al límite"
             };
@@ -321,7 +325,7 @@ module.exports = {
           if (node.selector==2) {
             if (node.timing[168+(node.selector-1)]<29) {
               node.timing[168+(node.selector-1)]++;
-              msg.foryou="Incrementada 1 grado la temperatura de apagado de la caldera";
+              msg.foryou="+1º la temperatura de apagado de la caldera";
             } else {
               msg.foryou="Has llegado al límite";
             }
@@ -345,7 +349,7 @@ module.exports = {
           if (node.selector==1) {
             if (node.timing[168+(node.selector-1)]>12) {
               node.timing[168+(node.selector-1)]--;
-              msg.foryou="Decrememtada 1 grado la temperatura contra heladas";
+              msg.foryou="-1º la temperatura contra heladas";
             } else {
               msg.foryou="Has llegado al límite";
             }
@@ -353,7 +357,7 @@ module.exports = {
           if (node.selector==2) {
             if (node.timing[168+(node.selector-1)]>12) {
               node.timing[168+(node.selector-1)]--;
-              // msg.foryou="Decrememtada 1 grado la temperatura de apagado de la caldera";
+              msg.foryou="-1º la temperatura de apagado de la caldera";
             } else {
               msg.foryou="Has llegado al límite";
             }
@@ -414,7 +418,11 @@ module.exports = {
         case '27':
         case '28':
         case '29': node.selector=parseInt(msg.payload);
-          if (msg.payload=='29')
+          if (msg.payload=='1')
+            msg.foryou="Seleccionada la temperatura contra heladas";
+          else if (msg.payload=='2')
+            msg.foryou="Temperatura de apagado de la caldera";
+          else if (msg.payload=='29')
             msg.foryou=RED._("week_schedule.DAYOFWEEK");
           else
             msg.foryou=`${RED._("week_schedule.SELECTED")} ${parseInt(msg.payload)-4}`;
