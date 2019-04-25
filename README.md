@@ -4,15 +4,13 @@ A Week Schedule UI for the Node-RED Dashboard
 
 ![dependencies](https://img.shields.io/david/ingeniadevteam/node-red-contrib-ui-week-schedule.svg?style=flat-square)
 ![dev-dependencies](https://img.shields.io/david/dev/ingeniadevteam/node-red-contrib-ui-week-schedule.svg?style=flat-square)
-![optional-dependencies](https://img.shields.io/david/optional/ingeniadevteam/node-red-contrib-ui-week-schedule.svg?style=flat-square)
-![peer-dependencies](https://img.shields.io/david/peer/ingeniadevteam/node-red-contrib-ui-week-schedule.svg?style=flat-square)
 
 ## Original projects
 
 This project is an integration of these two:
 
-[A Thermostat Weekend](https://tech.scargill.net/tag/a-node-red-dashboard-thermostat-in-the-making/)
-[node-red-contrib-ui-led](https://flows.nodered.org/node/node-red-contrib-ui-led)
+* [A Thermostat Weekend](https://tech.scargill.net/tag/a-node-red-dashboard-thermostat-in-the-making/)
+* [node-red-contrib-ui-led](https://flows.nodered.org/node/node-red-contrib-ui-led)
 
 ## Screenshots
 
