@@ -1,13 +1,15 @@
-## Node-RED Week Schedule
+## Node-RED Week Schedule UI
 
-A week schedule for the Node-RED Dashboard
+A Week Schedule UI for the Node-RED Dashboard
 
-![dependencies](https://img.shields.io/david/vicnala/node-red-contrib-ui-week-schedule.svg?style=flat-square)
-![dev-dependencies](https://img.shields.io/david/dev/vicnala/node-red-contrib-ui-week-schedule.svg?style=flat-square)
-![optional-dependencies](https://img.shields.io/david/optional/vicnala/node-red-contrib-ui-week-schedule.svg?style=flat-square)
-![peer-dependencies](https://img.shields.io/david/peer/vicnala/node-red-contrib-ui-week-schedule.svg?style=flat-square)
+![dependencies](https://img.shields.io/david/ingeniadevteam/node-red-contrib-ui-week-schedule.svg?style=flat-square)
+![dev-dependencies](https://img.shields.io/david/dev/ingeniadevteam/node-red-contrib-ui-week-schedule.svg?style=flat-square)
+![optional-dependencies](https://img.shields.io/david/optional/ingeniadevteam/node-red-contrib-ui-week-schedule.svg?style=flat-square)
+![peer-dependencies](https://img.shields.io/david/peer/ingeniadevteam/node-red-contrib-ui-week-schedule.svg?style=flat-square)
 
 ## Original projects
+
+This project is an integration of these two:
 
 [A Thermostat Weekend](https://tech.scargill.net/tag/a-node-red-dashboard-thermostat-in-the-making/)
 [node-red-contrib-ui-led](https://flows.nodered.org/node/node-red-contrib-ui-led)
@@ -41,6 +43,7 @@ The timing is stored as a 24·7 = 168 hours array. Every hour has a setpoint val
 ```
 ## Features
 
+* Multiple schedules.
 * When you press the save button, the node emits a message with a **save** property containing the array.
 * A **msg.topic** with the node name is added to every message.
 
