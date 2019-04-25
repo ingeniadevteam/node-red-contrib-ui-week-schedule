@@ -1,4 +1,5 @@
 ## Node-RED Week Schedule
+
 A week schedule for the Node-RED Dashboard
 
 ![dependencies](https://img.shields.io/david/vicnala/node-red-contrib-ui-week-schedule.svg?style=flat-square)
@@ -6,12 +7,40 @@ A week schedule for the Node-RED Dashboard
 ![optional-dependencies](https://img.shields.io/david/optional/vicnala/node-red-contrib-ui-week-schedule.svg?style=flat-square)
 ![peer-dependencies](https://img.shields.io/david/peer/vicnala/node-red-contrib-ui-week-schedule.svg?style=flat-square)
 
+## Original projects
+
+[A Thermostat Weekend](https://tech.scargill.net/tag/a-node-red-dashboard-thermostat-in-the-making/)
+[node-red-contrib-ui-led](https://flows.nodered.org/node/node-red-contrib-ui-led)
+
+## Screenshots
+
 ![Examples Image](images/examples.png)
 ![UI Image](images/ui.png)
 
 ## TODO
 
 * i18n
+
+## Timing and setpoints
+
+The timing is stored as a 24·7 = 168 hours array. Every hour has a setpoint value.
+
+```js
+[
+  0,0,0,0,0,0,0,23,23,23,23,23,23,23,23,23,23,23,23,0,0,0,0,0,  // monday
+  0,0,0,0,0,0,0,23,23,23,23,23,23,23,23,23,23,23,23,0,0,0,0,0,  // tuesday
+  0,0,0,0,0,0,0,23,23,23,23,23,23,23,23,23,23,23,23,0,0,0,0,0,  // wednesday
+  0,0,0,0,0,0,0,23,23,23,23,23,23,23,23,23,23,23,23,0,0,0,0,0,  // thursday
+  0,0,0,0,0,0,0,23,23,23,23,23,23,23,23,23,23,23,23,0,0,0,0,0,  // friday
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,              // saturday
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,              // sunday
+  4,22    // frost and away heater temperatures
+];
+```
+## Features
+
+* When you press the save button, the node emits a message with a **save** property containing the array.
+* A **msg.topic** with the node name is added to every message.
 
 ## Install
 To install the node run the following from your Node-RED user directory (`~/.node-red`):
