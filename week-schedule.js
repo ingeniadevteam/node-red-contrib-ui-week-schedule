@@ -46,6 +46,12 @@ module.exports = function(RED) {
 						/********************
 						* THIS IS SERVER SIDE
 						********************/
+
+						// filter current node messages
+						// if (msg.topic !== config.name) {
+						// 	msg
+						// }
+
 						if (msg.timing) {
 							console.log("msg", msg._msgid);
 							// update server side node timing

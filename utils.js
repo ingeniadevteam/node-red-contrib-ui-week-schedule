@@ -9,7 +9,7 @@ module.exports = {
   .thetemps { font-size:70%; color:#888888 !important; }
   .smallheadings { color:#00A4DE; font-size:80%; }
 </style>
-<table width="100%">
+<table id={{msg.topic}} width="100%">
 <tr>
     <td colspan=9><center><span class="smallheadings" >Día</span></center></td>
     <td colspan=3><center><span class="smallheadings" >Caldera</span></center></td>
@@ -250,35 +250,13 @@ module.exports = {
         msg.foryou=RED._("week_schedule.SAVED");
         msg.save = node.timing;
       break;
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-      case '10':
-      case '11':
-      case '12':
-      case '13':
-      case '14':
-      case '15':
-      case '16':
-      case '17':
-      case '18':
-      case '19':
-      case '20':
-      case '21':
-      case '22':
-      case '23':
-      case '24':
-      case '25':
-      case '26':
-      case '27':
-      case '28':
-      case '29': node.selector=parseInt(msg.payload);
+      case '1': case '2': case '3': case '4': case '5': case '6': case '7':
+      case '8': case '9': case '10': case '11': case '12': case '13':
+      case '14': case '15': case '16': case '17': case '18': case '19':
+      case '20': case '21': case '22': case '23': case '24': case '25':
+      case '26': case '27': case '28':
+      case '29':
+        node.selector=parseInt(msg.payload);
         if (msg.payload=='1')
           msg.foryou="Seleccionada la temperatura contra heladas";
         else if (msg.payload=='2')
@@ -289,6 +267,9 @@ module.exports = {
           msg.foryou=`${RED._("week_schedule.SELECTED")} ${parseInt(msg.payload)-4}`;
       break;
     }
+
+    // filter empty messages
+    if (!msg) return;
 
     msg.days=node.days;
     msg.selector=node.selector;
@@ -389,35 +370,13 @@ module.exports = {
           msg.foryou=RED._("week_schedule.SAVED");
           msg.save = node.timing;
         break;
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-        case '10':
-        case '11':
-        case '12':
-        case '13':
-        case '14':
-        case '15':
-        case '16':
-        case '17':
-        case '18':
-        case '19':
-        case '20':
-        case '21':
-        case '22':
-        case '23':
-        case '24':
-        case '25':
-        case '26':
-        case '27':
-        case '28':
-        case '29': node.selector=parseInt(msg.payload);
+        case '1': case '2': case '3': case '4': case '5': case '6': case '7':
+        case '8': case '9': case '10': case '11': case '12': case '13':
+        case '14': case '15': case '16': case '17': case '18': case '19':
+        case '20': case '21': case '22': case '23': case '24': case '25':
+        case '26': case '27': case '28':
+        case '29':
+          node.selector=parseInt(msg.payload);
           if (msg.payload=='1')
             msg.foryou="Seleccionada la temperatura contra heladas";
           else if (msg.payload=='2')
@@ -428,6 +387,9 @@ module.exports = {
             msg.foryou=`${RED._("week_schedule.SELECTED")} ${parseInt(msg.payload)-4}`;
         break;
       }
+
+      // filter empty messages
+      if (!msg) return;
 
       // update node timing
       if (msg.timing) {
@@ -442,9 +404,7 @@ module.exports = {
     }
   },
 
-  initController: function($scope, any, red) {
-    console.log(any);
-    console.log(red);
+  initController: function($scope) {
     /******************************
     * THIS IS CLIENT (browser) SIDE
     ******************************/
@@ -472,48 +432,60 @@ module.exports = {
       if (val==29) { $(mm).height("72%"); $(mm).css('background-color','#ff0000'); } // red
     };
 
-    stat = (text) => {
-      $("#info").text(text);
-      var tm=setTimeout(function(){ $("#info").text(''); clearTimeout(tm);}, 3000);
+    stat = (text,topic) => {
+      // $("#info").text(text);
+      $(`#${topic} #info`).text(text);
+      var tm=setTimeout(function(){ $(`#${topic} #info`).text(''); clearTimeout(tm);}, 3000);
     };
 
-    var selec = (val,sta) => {
-      var w="#td"+val;
+    var selec = (val,sta,topic) => {
+      // var w="#td"+val;
+      var w=`#${topic} #td${val}`;
       if (sta) $(w).css('background-color','magenta'); else $(w).css('background-color','#00A4DE');
     };
 
     var updateUI = (msg) => {
-      selec(last,0); last=msg.selector; selec(last,1);
+      selec(last,0, msg.topic);
+      last=msg.selector;
+      selec(last,1,msg.topic);
       for (var x=0; x<24; x++) {
-        var w="#t"+x; bar(w,msg.timing[((msg.days-1)*24)+x]);
-        var v="#v"+x; $(v).text(msg.timing[((msg.days-1)*24)+x])
+        // var w="#t"+x;
+        var w=`#${msg.topic} #t${x}`;
+        bar(w,msg.timing[((msg.days-1)*24)+x]);
+        // var v="#v"+x;
+        var v=`#${msg.topic} #v${x}`;
+        $(v).text(msg.timing[((msg.days-1)*24)+x])
       }
       for (var x=0; x<2; x++) {
-        var w="#s"+x; $(w).text(msg.timing[168+x]);
+        // var w="#s"+x;
+        var w=`#${msg.topic} #s${x}`;
+        $(w).text(msg.timing[168+x]);
       }
 
       // set day
-      $("#d0").text(thedays[msg.days-1]);
+      // $("#d0").text(thedays[msg.days-1]);
+      $(`#${msg.topic} #d0`).text(thedays[msg.days-1]);
 
       if ((last>4) &&(last<29)) {
-        $("#current").text(msg.timing[((msg.days-1)*24)+last-5]);
+        // $("#current").text(msg.timing[((msg.days-1)*24)+last-5]);
+        $(`#${msg.topic} #current`).text(msg.timing[((msg.days-1)*24)+last-5]);
       }
       else {
-        $("#current").text("-");
+        // $("#current").text("-");
+        $(`#${msg.topic} #current`).text("-");
       }
       if (msg.foryou!="") {
-        stat(msg.foryou);
+        stat(msg.foryou,msg.topic);
       }
     };
 
     $scope.flag = true;
 
     var update = (msg) => {
-      if (!msg) {
-        return;
-      }
+      if (!msg) return;
+      if (!msg.topic) return;
 
-      console.log("ui msg", msg);
+      console.log("ui msg", msg.topic, msg.foryou);
 
       // updateUI
       updateUI(msg);

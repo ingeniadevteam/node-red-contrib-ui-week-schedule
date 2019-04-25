@@ -19,6 +19,8 @@ A week schedule for the Node-RED Dashboard
 
 ## TODO
 
+* min/max setpoint config options
+* on/off setpoint config option
 * i18n
 
 ## Timing and setpoints
@@ -43,6 +45,7 @@ The timing is stored as a 24·7 = 168 hours array. Every hour has a setpoint val
 * A **msg.topic** with the node name is added to every message.
 
 ## Install
+
 To install the node run the following from your Node-RED user directory (`~/.node-red`):
 ```bash
 npm install node-red-contrib-ui-week-schedule
