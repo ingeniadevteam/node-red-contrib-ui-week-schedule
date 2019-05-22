@@ -49,10 +49,8 @@ The timing is stored as a 24·7 = 168 hours array. Every hour has a setpoint val
 
 To install the node run the following from your Node-RED user directory (`~/.node-red`):
 ```bash
-npm install node-red-contrib-ui-week-schedule
+npm install @clysema/node-red-contrib-ui-week-schedule
 ```
-
-Or install the node from the Palette section of your Node-RED editor by searching by name (`node-red-contrib-ui-week-schedule`).
 
 ## Example
 

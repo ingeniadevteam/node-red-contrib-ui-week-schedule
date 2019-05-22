@@ -53,7 +53,7 @@ module.exports = function(RED) {
 						// }
 
 						if (msg.timing) {
-							console.log("msg", msg._msgid);
+							// console.log("msg", msg._msgid);
 							// update server side node timing
 							node.timing = msg.timing;
 							// set topic
@@ -64,7 +64,7 @@ module.exports = function(RED) {
 						}
 						if (orig) {
 							if (orig.msg) {
-								console.log("orig.msg", orig.msg);
+								// console.log("orig.msg", orig.msg);
 								// setup msg timing
 								orig.msg.timing = node.timing;
 								// set topic

@@ -274,7 +274,7 @@ module.exports = {
     msg.days=node.days;
     msg.selector=node.selector;
 
-    console.log("ui click", msg._msgid ? msg._msgid : "", msg.foryou ? msg.foryou : "");
+    // console.log("ui click", msg._msgid ? msg._msgid : "", msg.foryou ? msg.foryou : "");
   },
 
 
@@ -485,10 +485,12 @@ module.exports = {
       if (!msg) return;
       if (!msg.topic) return;
 
-      console.log("ui msg", msg.topic, msg.foryou);
+      // console.log("ui msg", msg.topic, msg.foryou);
 
       // updateUI
-      updateUI(msg);
+      setTimeout(() => {
+        updateUI(msg);
+      }, 100);
     };
     $scope.$watch('msg', update);
   }
