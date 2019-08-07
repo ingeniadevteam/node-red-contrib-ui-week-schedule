@@ -1,12 +1,12 @@
 {
   "name": "@clysema/node-red-contrib-ui-week-schedule",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Week Schedule UI for the Node-RED Dashboard",
   "main": "week-schedule.js",
   "author": "Víctor Navarro <vicnala@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "node-red-dashboard": "^2.14.0"
+    "node-red-dashboard": "^2.15.5"
   },
   "keywords": [
     "node-red",
@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "eslint": "5.x",
-    "eslint-plugin-angular": "4.x"
+    "eslint-plugin-angular": "^4.0.1"
   }
 }
