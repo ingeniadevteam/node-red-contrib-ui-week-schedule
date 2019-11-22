@@ -1,6 +1,6 @@
 {
   "name": "@clysema/node-red-contrib-ui-week-schedule",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A Week Schedule UI for the Node-RED Dashboard",
   "main": "week-schedule.js",
   "author": "Víctor Navarro <vicnala@gmail.com>",
