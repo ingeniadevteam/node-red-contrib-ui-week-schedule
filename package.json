@@ -1,6 +1,6 @@
 {
   "name": "@clysema/node-red-contrib-ui-week-schedule",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Week Schedule UI for the Node-RED Dashboard",
   "main": "week-schedule.js",
   "author": "Víctor Navarro <vicnala@gmail.com>",
@@ -28,7 +28,7 @@
     "url": "git+https://github.com/ingeniadevteam/node-red-contrib-ui-week-schedule.git"
   },
   "devDependencies": {
-    "eslint": "5.x",
+    "eslint": "^5.16.0",
     "eslint-plugin-angular": "^4.0.1"
   }
 }
